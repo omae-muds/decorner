@@ -19,7 +19,7 @@
         });
     })
     const submit = async () => {
-        await fetch('http://localhost:8000/api/message', {
+        await fetch('http://decorner.vercel.app/api/message', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
