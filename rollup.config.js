@@ -4,6 +4,11 @@ import resolve from '@rollup/plugin-node-resolve';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
+import replace from '@rollup/plugin-replace';
+import dotenv from 'dotenv';
+
+dotenv.config();
+const env = process.env;
 
 const production = !process.env.ROLLUP_WATCH;
 
@@ -37,6 +42,14 @@ export default {
 		file: 'public/build/bundle.js'
 	},
 	plugins: [
+		replace({
+            PUSHER_APP_ID: JSON.stringify(env.PUSHER_APP_ID),
+            PUSHER_KEY: JSON.stringify(env.PUSHER_KEY),
+            PUSHER_SECRET: JSON.stringify(env.PUSHER_SECRET),
+            PUSHER_CLUSTER: JSON.stringify(env.PUSHER_CLUSTER),
+            PUSHER_CHAT_CHANNEL: JSON.stringify(env.PUSHER_CHAT_CHANNEL),
+            PUSHER_MESSAGE_EVENT: JSON.stringify(env.PUSHER_MESSAGE_EVENT)
+        }),
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production

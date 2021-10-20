@@ -1,25 +1,22 @@
 <script>
-	import {onMount} from 'svelte';
+    import {onMount} from 'svelte';
     import Pusher from 'pusher-js';
-	
-	require('dotenv').config();
-	const env = process.env
 
     let username = 'username';
     let message = '';
     let messages = [];
     onMount(() => {
         Pusher.logToConsole = true;
-        const pusher = new Pusher(env.PUSHER_KEY, {
-            cluster: env.PUSHER_CLUSTER
+        const pusher = new Pusher(PUSHER_KEY, {
+            cluster: PUSHER_CLUSTER
         });
-        const channel = pusher.subscribe(env.PUSHER_CHAT_CHANNEL);
-        channel.bind(env.PUSHER_MESSAGE_EVENT, data => {
+        const channel = pusher.subscribe(PUSHER_CHAT_CHANNEL);
+        channel.bind(PUSHER_MESSAGE_EVENT, data => {
             messages = [...messages, data];
         });
-    })
+    });
     const submit = async () => {
-        await fetch('http://decorner.vercel.app/api/message', {
+        await fetch('https://decorner.vercel.app/api/message', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
