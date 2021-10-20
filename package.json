@@ -18,6 +18,9 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "dotenv": "^10.0.0",
+    "pusher": "^5.0.0",
+    "pusher-js": "^7.0.3",
     "sirv-cli": "^1.0.0"
   }
 }
