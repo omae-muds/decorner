@@ -41,9 +41,9 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 
                         <div class="message">
                             <div class="d-flex w-100 align-items-center justify-content-between">
-                                <strong class="mb-1"><p>{msg.username}</strong>
+                                <strong class="mb-1">{msg.username}</strong>
                             </div>
-                            <div class="col-10 mb-1 small"><p>{msg.message}</div>
+                            <div class="col-10 mb-1 small">{msg.message}</div>
                         </div>
 
                     </div>
@@ -71,7 +71,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 }
     #user-area{
         border-radius: 6px;/*角の丸み*/
-        position: fixed;
+        /* position: fixed; */
     }
     .container {
         background-color:rgb(100,150,195);
@@ -100,7 +100,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 	background-color:white;
 	border-radius:10px;
 	padding:10px;
-	margin:0 0 0 10px;
+	margin:0 0 10px 10px;
 }
 
 
@@ -109,8 +109,8 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         display: flex;
         bottom: 0; /*下に固定*/
         position: fixed;
-        max-height: 100vh;
-        white-space: normal;
+        /* max-height: 100vh; */
+        /* white-space: normal; */
 }
     .message-area-text {
         width: 90%;
@@ -131,10 +131,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         width: 100%;
         height: 100%;
         background:greenyellow;
-        /* font-size: 1.0rem; */
         font-weight: bold;
-        /* padding: 0.5em 1em; */
-        /* margin: 2em 0; */
         border: solid 3px #6091d3;/*線*/
         border-radius: 6px;/*角の丸み*/
         box-sizing: border-box;
@@ -143,10 +140,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         width: 100%;
         height: 100%;
         background: ghostwhite;
-        /* font-size: 1.0rem; */
         font-weight: bold;
-        /* padding: 0.5em 1em; */
-        /* margin: 2em 0; */
         border: solid 3px #6091d3;/*線*/
         border-radius: 6px;/*角の丸み*/
         box-sizing: border-box;
