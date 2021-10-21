@@ -57,12 +57,12 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
                 <form on:submit|preventDefault={submit}>
                     <input id="text-area" placeholder="Write a message" bind:value={message}/>
                 </form>
-            </div>
+            <!-- </div>
             <div class="message-area-send">
                 <form>
                     <input id="send-area" type="submit" bind:value={message}/>
                 </form>
-            </div>
+            </div> -->
         </div>
     </div>
 </div>
@@ -73,14 +73,14 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         height: 100%;
 }
     .bar{
-        background-color:rgb(100,150,195);
+        background-color:red;
         /* position:fixed; */
         top:0;
         width:100%;
         box-sizing:border-box;
         height:6ex;
         /* margin-right: 1em; */
-        z-index:500;
+        z-index:1000;
 }
     #user-area{
         border-radius: 6px;/*角の丸み*/
@@ -97,7 +97,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 
     .scrollarea {
         background-color:rgb(100,150,195);
-        z-index: 100;
+        /* z-index: 100; */
         overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
         /* padding-top: 6ex; */
         margin-top:6ex;
@@ -129,7 +129,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 
 
     .message-area {
-        background-color:rgb(100,150,195);
+        /* background-color:rgb(100,150,195); */
         height: 6ex;
         width: 100%;
         display: flex;
@@ -139,6 +139,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         /* white-space: normal; */
 }
     .message-area-text {
+        background-color:rgb(100,150,195);
         width: 90%;
         word-wrap: break-word;
         /* overflow-y: scroll;*/
@@ -146,6 +147,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         white-space: normal;
 }
     .message-area-send {
+        background-color:rgb(100,150,195);
         width: 10%;
         margin-right: 1em;
         /* position: fixed; */
