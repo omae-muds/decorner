@@ -71,7 +71,8 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 }
     #user-area{
         border-radius: 6px;/*角の丸み*/
-        /* position: fixed; */
+        position: fixed;
+        height: 6ex;
     }
     .container {
         background-color:rgb(100,150,195);
@@ -84,27 +85,29 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     .scrollarea {
         background-color:rgb(100,150,195);
         overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
+        margin:6ex 0 6ex 0;
         /* min-height: 100%; */
     }
     .message:before {  /* ふきだしの左三角を描画 */
-	content: '';
-	position:absolute;
-	top:8px;
-	left:-20px;
-	border: 12px solid transparent;
-	border-right:12px solid white;
+        content: '';
+        position:absolute;
+        top:8px;
+        left:-20px;
+        border: 12px solid transparent;
+        border-right:12px solid white;
 }
     .message { /* ふきだしの本体 */
-	display:inline-block;
-	position:relative;
-	background-color:white;
-	border-radius:10px;
-	padding:10px;
-	margin:0 0 10px 10px;
+        display:inline-block;
+        position:relative;
+        background-color:white;
+        border-radius:10px;
+        padding:10px;
+        margin:0 0 10px 10px;
 }
 
 
     .message-area {
+        height: 6ex;
         width: 100%;
         display: flex;
         bottom: 0; /*下に固定*/
