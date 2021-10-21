@@ -32,7 +32,9 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     <div class="container">
         <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white">
             <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
-                <input class="fs-5 fw-semibold" id ='user-area' bind:value={username}/>
+                <div class='bar'>
+                    <input class="fs-5 fw-semibold" id ='user-area' bind:value={username}/>
+                </div>>
             </div>
 
             <div class="list-group list-group-flush border-bottom scrollarea">
@@ -67,11 +69,23 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 
 <style>
     .body {
+        /* background-color:rgb(100,150,195); */
         height: 100%;
+}
+    .bar{
+        background-color:rgb(100,150,195);
+        /* position:fixed; */
+        top:0;
+        width:100%;
+        box-sizing:border-box;
+        height:100px;
+        /* margin-right: 1em; */
+        z-index:500;
 }
     #user-area{
         border-radius: 6px;/*角の丸み*/
         position: fixed;
+        /* background-color:rgb(100,150,195); */
     }
     .container {
         background-color:rgb(100,150,195);
@@ -84,9 +98,13 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     .scrollarea {
         background-color:rgb(100,150,195);
         overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
-        padding-top: 6ex;
-        padding-bottom: 6ex;
-        max-height: 100%-12ex;
+        /* padding-top: 6ex; */
+        margin-top:6ex;
+        /* margin: 6ex; */
+        /* border-top: 6ex; */
+        /* padding-bottom: 6ex; */
+        margin-bottom: 6ex;
+        /* max-height: 100%-12ex; */
         /* margin:6ex 0 6ex 0; */
         /* min-height: 100%; */
     }
@@ -110,6 +128,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 
 
     .message-area {
+        background-color:rgb(100,150,195);
         height: 6ex;
         width: 100%;
         display: flex;
