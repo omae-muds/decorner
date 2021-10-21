@@ -72,7 +72,8 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     #user-area{
         border-radius: 6px;/*角の丸み*/
         position: fixed;
-        height: 6ex;
+        margin-bottom: 6ex;
+        /* height: 2ex; */
     }
     .container {
         background-color:rgb(100,150,195);
@@ -85,7 +86,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     .scrollarea {
         background-color:rgb(100,150,195);
         overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
-        margin:6ex 0 6ex 0;
+        /* margin:6ex 0 6ex 0; */
         /* min-height: 100%; */
     }
     .message:before {  /* ふきだしの左三角を描画 */
