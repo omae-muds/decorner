@@ -72,8 +72,6 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     #user-area{
         border-radius: 6px;/*角の丸み*/
         position: fixed;
-        margin-bottom: 6ex;
-        /* height: 2ex; */
     }
     .container {
         background-color:rgb(100,150,195);
@@ -84,7 +82,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     }
 
     .scrollarea {
-        background-color:rgb(100,150,195);
+        /* background-color:rgb(100,150,195); */
         overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
         /* margin:6ex 0 6ex 0; */
         /* min-height: 100%; */
@@ -104,6 +102,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         border-radius:10px;
         padding:10px;
         margin:0 0 10px 10px;
+        max-width: 75vw;
 }
 
 
