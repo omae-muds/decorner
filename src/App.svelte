@@ -58,7 +58,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
                     <input id="text-area" placeholder="Write a message" bind:value={message}/>
                 </form>
 
-                
+
         </div>
     </div>
 </div>
@@ -92,8 +92,9 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     }
 
     .scrollarea {
+        position:relative;
         background-color:rgb(100,150,195);
-        /* z-index: 100; */
+        z-index: 100;
         overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
         /* padding-top: 6ex; */
         margin-top:6ex;
