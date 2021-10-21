@@ -34,15 +34,18 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
             <div class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
                 <input class="fs-5 fw-semibold" id ='user-area' bind:value={username}/>
             </div>
+
             <div class="list-group list-group-flush border-bottom scrollarea">
                 {#each messages as msg}
                     <div class="list-group-item list-group-item-action py-3 lh-tight">
-                        <div class="d-flex w-100 align-items-center justify-content-between">
 
-                            <strong class="mb-1">{msg.username}</strong>
+                        <div class="message">
+                            <div class="d-flex w-100 align-items-center justify-content-between">
+                                <strong class="mb-1">{msg.username}</strong>
+                            </div>
+                            <div class="col-10 mb-1 small">{msg.message}</div>
                         </div>
-                        
-                        <div class="col-10 mb-1 small">{msg.message}</div>
+
                     </div>
                 {/each}
             </div>
@@ -81,29 +84,40 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     .scrollarea {
         background-color:rgb(100,150,195);
         overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
-        min-height: 100%;
+        /* min-height: 100%; */
     }
+    .message:before {  /* ふきだしの左三角を描画 */
+	content: '';
+	position:absolute;
+	top:8px;
+	left:-20px;
+	border: 12px solid transparent;
+	border-right:12px solid white;
+}
+    .message { /* ふきだしの本体 */
+	display:inline-block;
+	position:relative;
+	background-color:white;
+	border-radius:10px;
+	padding:10px;
+	margin:0 0 0 10px;
+}
+
 
     .message-area {
         width: 100%;
         display: flex;
         bottom: 0; /*下に固定*/
-        /* padding-bottom: 0%; */
-        /* position: absolute; */
         position: fixed;
         max-height: 100vh;
-        /* right: auto;
-        left: auto; */
+        white-space: normal;
 }
     .message-area-text {
         width: 90%;
         word-wrap: break-word;
-        /* position: fixed; */
-        /* position: absolute; */
-        /* bottom: 0; 下に固定 */
         /* overflow-y: scroll;*/
         max-height: 100vh;
-        /* right: auto; */
+        white-space: normal;
 }
     .message-area-send {
         width: 10%;
