@@ -58,7 +58,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
             </div>
             <div class="message-area-send">
                 <form>
-                    <input id="send-area" type="submit" value="Send">
+                    <input id="send-area" type="submit" bind:value={message}/>
                 </form>
             </div>
         </div>
