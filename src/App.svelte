@@ -39,10 +39,10 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
                     <div class="list-group-item list-group-item-action py-3 lh-tight">
                         <div class="d-flex w-100 align-items-center justify-content-between">
 
-                            <strong class="mb-1">{msg.username}</strong>
+                            <strong class="mb-1"><p>{msg.username}</strong>
                         </div>
                         
-                        <div class="col-10 mb-1 small">{msg.message}</div>
+                        <div class="col-10 mb-1 small"><p>{msg.message}</div>
                     </div>
                 {/each}
             </div>
