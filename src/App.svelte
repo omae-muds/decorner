@@ -84,7 +84,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     .scrollarea {
         /* background-color:rgb(100,150,195); */
         overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
-        margin-top: 6ex;
+        padding-top: 6ex;
         /* margin:6ex 0 6ex 0; */
         /* min-height: 100%; */
     }
