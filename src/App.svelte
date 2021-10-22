@@ -75,6 +75,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         width: 100%;
         background-color:rgb(100,150,195);
         height: 100%;
+        z-index: -2;
 }
     .bar{
         background-color:red;
