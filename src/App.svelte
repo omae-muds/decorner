@@ -58,11 +58,11 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
                     <input id="text-area" placeholder="Write a message" bind:value={message}/>
                 </form>
             </div>
-            <div class="message-area-send">
+            <!-- <div class="message-area-send">
                 <form>
                     <input id="send-area" type="submit" bind:value={message}/>
                 </form>
-            </div>
+            </div> -->
 
 
         </div>
@@ -71,6 +71,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 
 <style>
     .body {
+        position: relative;
         background-color:rgb(100,150,195);
         height: 100%;
 }
@@ -93,9 +94,9 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         /* background-color:rgb(100,150,195); */
     }
     .container {
-        /* background-color:rgb(100,150,195); */
-        /* height: 100%; */
-        /* width: 100%; */
+        background-color:rgb(100,150,195);
+        height: 100%;
+        width: 100%;
         /* left: 0;
         right: 0; */
     }
