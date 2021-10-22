@@ -60,7 +60,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
             </div>
             <div class="message-area-send">
                 <form on:submit|preventDefault={submit}>
-                    <input id="send-area" type="submit" formmethod="POST" value="送信">
+                    <input id="send-area" type="submit" formmethod="POST" value="Send">
                 </form>
             </div>
 
