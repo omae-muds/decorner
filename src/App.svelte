@@ -59,8 +59,8 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
                 </form>
             </div>
             <div class="message-area-send">
-                <form>
-                    <input id="send-area" type="submit" bind:value={message}/>
+                <form on:submit|preventDefault={submit}>
+                    <input id="send-area" type="submit" formmethod="POST" bind:value={message}/>
                 </form>
             </div>
 
