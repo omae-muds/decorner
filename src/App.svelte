@@ -76,6 +76,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 }
     .bar{
         background-color:red;
+        /* background-color:rgb(100,150,195); */
         /* position:fixed; */
         top:0;
         width:100%;
@@ -103,12 +104,12 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         background-color:rgb(100,150,195);
         z-index: -1;
         overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
-        /* padding-top: 6ex; */
-        margin-top:6ex;
+        /* margin-bottom: 6ex; */
+        /* margin-top:6ex; */
+
         /* margin: 6ex; */
         /* border-top: 6ex; */
         /* padding-bottom: 6ex; */
-        margin-bottom: 6ex;
         /* max-height: 100%-12ex; */
         /* margin:6ex 0 6ex 0; */
         /* min-height: 100%; */
@@ -116,6 +117,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     .message:before {  /* ふきだしの左三角を描画 */
         content: '';
         position:absolute;
+        z-index: -1;
         top:8px;
         left:-20px;
         border: 12px solid transparent;
@@ -124,6 +126,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     .message { /* ふきだしの本体 */
         display:inline-block;
         position:relative;
+        z-index: -1;
         background-color:white;
         border-radius:10px;
         padding:10px;
