@@ -108,7 +108,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         /* position:relative; */
         background-color:rgb(100,150,195);
         /* z-index: -1; */
-        overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
+        /* overflow-y: scroll; スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
         /* margin-bottom: 6ex; */
         /* margin-top:6ex; */
         padding-top: 6ex;
