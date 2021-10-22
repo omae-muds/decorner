@@ -57,6 +57,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
                 <form on:submit|preventDefault={submit}>
                     <input id="text-area" placeholder="Write a message" bind:value={message}/>
                 </form>
+            </div>
 
 
         </div>
