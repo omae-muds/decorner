@@ -79,8 +79,8 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         /* z-index: -2; */
 }
     .bar{
-        background-color:red;
-        /* background-color:rgb(100,150,195); */
+        /* background-color:red; */
+        background-color:rgb(100,150,195);
         /* position:fixed; */
         top:0;
         width:100%;
