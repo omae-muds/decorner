@@ -58,6 +58,11 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
                     <input id="text-area" placeholder="Write a message" bind:value={message}/>
                 </form>
             </div>
+            <div class="message-area-send">
+                <form>
+                    <input id="send-area" type="submit" bind:value={message}/>
+                </form>
+            </div>
 
 
         </div>
@@ -77,8 +82,9 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         box-sizing:border-box;
         height:6ex;
         /* margin-right: 1em; */
-        z-index:1000;
+        z-index:0;
 }
+
     #user-area{
         border-radius: 6px;/*角の丸み*/
         position: fixed;
@@ -95,7 +101,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
     .scrollarea {
         position:relative;
         background-color:rgb(100,150,195);
-        z-index: 100;
+        z-index: -1;
         overflow-y: scroll; /* スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
         /* padding-top: 6ex; */
         margin-top:6ex;
@@ -133,6 +139,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         display: flex;
         bottom: 0; /*下に固定*/
         position: fixed;
+        z-index: 0;
         /* max-height: 100vh; */
         /* white-space: normal; */
 }
