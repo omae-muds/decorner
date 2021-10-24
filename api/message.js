@@ -14,6 +14,7 @@ const pusher = new Pusher({
 module.exports = (req, res) => {
   const body = req.body;
   const pusherResp = {
+    userId: body.userId,
     username: body.username,
     message: body.message
   };

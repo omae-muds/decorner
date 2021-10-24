@@ -3,6 +3,8 @@
     import Pusher from 'pusher-js';
 import { get_all_dirty_from_scope } from 'svelte/internal';
 
+    const userId = Math.random().toString(16).substring(2, 10)
+            + Math.random().toString(16).substring(2, 10);
     let username = 'username';
     let message = '';
     let messages = [];
@@ -21,6 +23,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
+                userId,
                 username,
                 message
             })
