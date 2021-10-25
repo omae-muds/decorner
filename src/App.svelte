@@ -30,6 +30,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         });
         message = '';
     };
+
 </script>
 <div class="body">
     <div class="container">
@@ -44,12 +45,28 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
                 {#each messages as msg}
                     <div class="list-group-item list-group-item-action py-3 lh-tight">
 
-                        <div class="message">
+                        {#if userId==userId}
+                            <div class="my-message">
+                                <div class="d-flex w-100 align-items-center justify-content-between">
+                                    <strong class="mb-1">{msg.username}</strong>
+                                </div>
+                                <div class="col-10 mb-1 small">{msg.message}</div>
+                            </div>
+                          {:else}
+                            <div class="0ther-message">
+                                <div class="d-flex w-100 align-items-center justify-content-between">
+                                    <strong class="mb-1">{msg.username}</strong>
+                                </div>
+                                <div class="col-10 mb-1 small">{msg.message}</div>
+                            </div>
+                        {/if}
+
+                        <!-- <div class="message">
                             <div class="d-flex w-100 align-items-center justify-content-between">
                                 <strong class="mb-1">{msg.username}</strong>
                             </div>
                             <div class="col-10 mb-1 small">{msg.message}</div>
-                        </div>
+                        </div> -->
 
                     </div>
                 {/each}
@@ -123,7 +140,27 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         /* margin:6ex 0 6ex 0; */
         /* min-height: 100%; */
     }
-    .message:before {  /* ふきだしの左三角を描画 */
+    .my-message:before {  /* ふきだしの左三角を描画 */
+        content: '';
+        position:absolute;
+        z-index: 0;
+        top:8px;
+        right:-20px;
+        border: 12px solid transparent;
+        border-right:12px solid white;
+}
+    .my-message { /* ふきだしの本体 */
+        display:inline-block;
+        position:relative;
+        z-index: 0;
+        background-color:greenyellow;
+        border-radius:10px;
+        padding:8px;
+        margin:0 10 10px 0px;
+        max-width: 75vw;
+}
+
+    .other-message:before {  /* ふきだしの左三角を描画 */
         content: '';
         position:absolute;
         z-index: 0;
@@ -132,7 +169,7 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         border: 12px solid transparent;
         border-right:12px solid white;
 }
-    .message { /* ふきだしの本体 */
+    .other-message { /* ふきだしの本体 */
         display:inline-block;
         position:relative;
         z-index: 0;
