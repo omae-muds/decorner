@@ -140,16 +140,18 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
         /* margin:6ex 0 6ex 0; */
         /* min-height: 100%; */
     }
-    .my-message:before {  /* ふきだしの左三角を描画 */
+    .my-message:before {  /* ふきだしの右三角を描画 */
+        float:right;
         content: '';
         position:absolute;
         z-index: 0;
         top:8px;
         right:-20px;
         border: 12px solid transparent;
-        border-right:12px solid white;
+        border-left:12px solid greenyellow;
 }
     .my-message { /* ふきだしの本体 */
+        float:right;
         display:inline-block;
         position:relative;
         z-index: 0;
