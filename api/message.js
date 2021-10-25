@@ -8,7 +8,7 @@ const pusher = new Pusher({
   key: env.PUSHER_KEY,
   secret: env.PUSHER_SECRET,
   cluster: env.PUSHER_CLUSTER,
-  useTLS: true
+  useTLS: true,
 });
 
 module.exports = (req, res) => {
@@ -16,7 +16,7 @@ module.exports = (req, res) => {
   const pusherResp = {
     userId: body.userId,
     username: body.username,
-    message: body.message
+    message: body.message,
   };
 
   pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pusherResp)
