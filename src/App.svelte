@@ -90,6 +90,10 @@ import { get_all_dirty_from_scope } from 'svelte/internal';
 </div>
 
 <style>
+    body{
+        background-color:rgb(100,150,195);
+    }
+    
     .body {
         position: absolute;
         width: 100%;
