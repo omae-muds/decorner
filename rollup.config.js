@@ -6,6 +6,7 @@ import { terser } from 'rollup-plugin-terser';
 import css from 'rollup-plugin-css-only';
 import replace from '@rollup/plugin-replace';
 import dotenv from 'dotenv';
+import copy from 'rollup-plugin-copy';
 
 dotenv.config();
 const env = process.env;
@@ -50,6 +51,18 @@ export default {
             PUSHER_CHAT_CHANNEL: JSON.stringify(env.PUSHER_CHAT_CHANNEL),
             PUSHER_MESSAGE_EVENT: JSON.stringify(env.PUSHER_MESSAGE_EVENT)
         }),
+		copy({
+			targets: [
+				{
+					src: "node_modules/bootstrap/dist/css/bootstrap.min.css",
+					dest: "public/vendor/bootstrap/css",
+				},
+				{
+					src: "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+					dest: "public/vendor/bootstrap/js",
+				},
+			],
+		}),
 		svelte({
 			compilerOptions: {
 				// enable run-time checks when not in production
