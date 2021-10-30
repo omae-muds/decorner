@@ -49,7 +49,9 @@ export default {
             PUSHER_SECRET: JSON.stringify(env.PUSHER_SECRET),
             PUSHER_CLUSTER: JSON.stringify(env.PUSHER_CLUSTER),
             PUSHER_CHAT_CHANNEL: JSON.stringify(env.PUSHER_CHAT_CHANNEL),
-            PUSHER_MESSAGE_EVENT: JSON.stringify(env.PUSHER_MESSAGE_EVENT)
+            PUSHER_MESSAGE_EVENT: JSON.stringify(env.PUSHER_MESSAGE_EVENT),
+
+			preventAssignment: true,
         }),
 		copy({
 			targets: [
