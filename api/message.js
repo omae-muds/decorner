@@ -66,19 +66,22 @@ module.exports = (req, res) => {
     .then(resp => res.status(200).send(resp))
     .catch(err => res.status(400).send(err));
 
-  if (body.message in banwords) {
-    apologiesList.forEach(apologies => {
-      apologies.forEach(apology => {
-        const pushApology = {
-          userId: body.userId,
-          username: body.username,
-          message: apology,
-        };
+  banwords.forEach(banword => {
+    if (body.message.includes(banword)) {
+      apologiesList.forEach(apologies => {
+        apologies.forEach(apology => {
+          const pushApology = {
+            userId: body.userId,
+            username: body.username,
+            message: apology,
+          };
 
-        pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
-          .then(resp => res.status(200).send(resp))
-          .catch(err => res.status(400).send(err));
+          pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
+            .then(resp => res.status(200).send(resp))
+            .catch(err => res.status(400).send(err));
+        });
       });
-    });
-  }
+      return;
+    }
+  });
 };
