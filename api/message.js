@@ -54,7 +54,7 @@ const apologiesList = [
 ];
 
 
-module.exports = async (req, res) => {
+module.exports = (req, res) => {
   const body = req.body;
   const pushMessage = {
     userId: body.userId,
@@ -77,7 +77,8 @@ module.exports = async (req, res) => {
           message: apology,
         };
 
-        await new Promise(r => setTimeout(r, 1000));
+        (async () => { await new Promise(r => setTimeout(r, 1000)) });
+
         pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
           .then(resp => res.status(200).send(resp))
           .catch(err => res.status(400).send(err))
