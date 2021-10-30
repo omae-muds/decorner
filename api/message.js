@@ -13,14 +13,46 @@ const pusher = new Pusher({
 });
 
 
-fs.readFile('banwords.json', 'utf-8', (err, data) => {
-  if (err) throw err;
-  const banwords = JSON.parse(data);
-})
-fs.readFile('apologiesList.json', 'utf-8', (err, data) => {
-  if (err) throw err;
-  const apologiesList = JSON.parse(data);
-})
+const banwords = [
+  'アホ',
+  'カス',
+  'バカ',
+  'ばか',
+  '馬鹿',
+  'ボケ',
+  '死ね',
+  'しね',
+  'ふざけんな',
+  '殺す',
+  'ころす',
+  'コロス',
+  '絶交',
+  '許さない'
+];
+
+const apologiesList = [
+  [
+      'ていうのはうそ',
+      '本心は違うよ❤'
+  ],
+  [
+      'なんてことは言いません',
+      'こんなひどいこと言えないよ'
+  ],
+  [
+      '////'
+  ],
+  [
+      '......',
+      'ごめん、言い過ぎた。',
+      '許して、もらえますか...?'
+  ],
+  [
+      'こんなふうに言わたら興奮するのにな〜?',
+      '...',
+      'まだかなぁ〜〜〜???'
+  ]
+];
 
 
 module.exports = (req, res) => {
