@@ -68,19 +68,23 @@ module.exports = (req, res) => {
 
   banwords.forEach(banword => {
     if (body.message.includes(banword)) {
-      apologiesList.forEach(apologies => {
-        apologies.forEach(apology => {
-          const pushApology = {
-            userId: body.userId,
-            username: body.username,
-            message: apology,
-          };
+      const randApologies = apologiesList[Math.floor(Math.random() * apologiesList.length)];
 
+      randApologies.forEach(apology => {
+        const pushApology = {
+          userId: body.userId,
+          username: body.username,
+          message: apology,
+        };
+
+        setTimeout(
           pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
             .then(resp => res.status(200).send(resp))
-            .catch(err => res.status(400).send(err));
-        });
+            .catch(err => res.status(400).send(err)),
+          2000
+        );
       });
+
       return;
     }
   });
