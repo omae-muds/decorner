@@ -6,18 +6,25 @@
         Math.random().toString(16).substring(2, 10) +
         Math.random().toString(16).substring(2, 10);
     let username = 'username';
+
     let message = '';
     let messages = [];
+
     onMount(() => {
         Pusher.logToConsole = true;
+
         const pusher = new Pusher(PUSHER_KEY, {
             cluster: PUSHER_CLUSTER,
         });
         const channel = pusher.subscribe(PUSHER_CHAT_CHANNEL);
-        channel.bind(PUSHER_MESSAGE_EVENT, (data) => {
-            messages = [...messages, data];
+
+        channel.bind(PUSHER_MESSAGE_EVENT, (resp) => {
+            // resp.whose = resp.userId === userId ? 'my' : 'other'
+            resp.whose = Math.random() < 0.5 ? 'my' : 'other'
+            messages = [...messages, resp];
         });
     });
+
     const submit = async () => {
         await fetch('https://decorner.vercel.app/api/message', {
             method: 'POST',
@@ -28,145 +35,97 @@
                 message,
             }),
         });
+
         message = '';
     };
 </script>
 
-<div class="body">
-    <div class="container">
-        <div
-            class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white"
-        >
-            <div
-                class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom"
+<div class="body container-fluid d-flex flex-column p-0">
+    <div class="top-bar container-fluid shadow-lg py-2">
+        <div class="input-group">
+            <input
+                class="form-control fw-semibold"
+                form="messaging"
+                placeholder="YourName"
+                bind:value={username}
+            />
+            <span class="input-group-text fw-light text-muted ps-1"
+                ><small>#{userId}</small></span
             >
-                <div class="bar">
-                    <input
-                        class="fs-5 fw-semibold"
-                        id="user-area"
-                        bind:value={username}
-                    />
-                </div>
-            </div>
+        </div>
+    </div>
 
-            <div class="list-group list-group-flush border-bottom scrollarea">
-                {#each messages as msg}
-                    <div
-                        class="list-group-item list-group-item-action py-3 lh-tight"
-                    >
-                        {#if userId == userId}
-                            <div class="my-message">
-                                <div
-                                    class="d-flex w-100 align-items-center justify-content-between"
-                                >
-                                    <strong class="mb-1">{msg.username}</strong>
-                                </div>
-                                <div class="col-10 mb-1 small">
-                                    {msg.message}
-                                </div>
-                            </div>
-                        {:else}
-                            <div class="0ther-message">
-                                <div
-                                    class="d-flex w-100 align-items-center justify-content-between"
-                                >
-                                    <strong class="mb-1">{msg.username}</strong>
-                                </div>
-                                <div class="col-10 mb-1 small">
-                                    {msg.message}
-                                </div>
-                            </div>
-                        {/if}
-
-                        <!-- <div class="message">
-                            <div class="d-flex w-100 align-items-center justify-content-between">
-                                <strong class="mb-1">{msg.username}</strong>
-                            </div>
-                            <div class="col-10 mb-1 small">{msg.message}</div>
-                        </div> -->
+    <div class="message-view container-fluid d-flex flex-grow-1 m-0 py-4">
+        <div class="list-group list-group-flush border-bottom">
+            {#each messages as msg}
+                <div
+                    class="list-group-item list-group-item-action lh-sm py-3"
+                >
+                    <div class="{msg.whose}-message">
+                        <div class="d-flex mx-2 mb-1">
+                            <span class="fw-bold text-truncate">{msg.username}</span>
+                            <span class="fw-light text-muted text-truncate align-text-bottom ms-1">
+                                <small>#{msg.userId}</small>
+                            </span>
+                        </div>
+                        <div class="col-10 mb-1 text-break">
+                            {msg.message}
+                        </div>
                     </div>
-                {/each}
-            </div>
+                </div>
+            {/each}
         </div>
-        <div class="message-area">
-            <div class="message-area-text">
-                <form on:submit|preventDefault={submit}>
-                    <input
-                        id="text-area"
-                        placeholder="Write a message"
-                        bind:value={message}
-                    />
-                </form>
+    </div>
+
+    <div class="bottom-bar container-fluid shadow-lg py-2">
+        <form id="messaging" action="POST" on:submit|preventDefault={submit}>
+            <div class="input-group">
+                <input
+                    class="form-control fw-semibold"
+                    placeholder="Message"
+                    bind:value={message}
+                />
+                <button class="input-group-text bg-greenyellow" type="submit">
+                    <ion-icon name="send-outline" />
+                    <span class="ms-2 fw-light">Send</span>
+                </button>
             </div>
-            <div class="message-area-send">
-                <form on:submit|preventDefault={submit}>
-                    <input
-                        id="send-area"
-                        type="submit"
-                        formmethod="POST"
-                        value="Send"
-                    />
-                </form>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
 <style>
-    body {
-        background-color: rgb(100, 150, 195);
+    :global(body) {
+        background-color: rgb(100, 150, 195) !important;
+        padding: 0;
     }
 
     .body {
-        position: absolute;
-        width: 100%;
-        /* background-color:rgb(100,150,195); */
-        /* background-color: ivory; */
-        height: 100%;
-        /* z-index: -2; */
+        min-height: 100vh;
     }
-    .bar {
-        /* background-color:red; */
-        background-color: rgb(100, 150, 195);
-        /* position:fixed; */
+
+    .top-bar {
+        position: sticky;
         top: 0;
-        width: 100%;
-        box-sizing: border-box;
-        height: 6ex;
-        /* margin-right: 1em; */
-        z-index: 1;
-        position: fixed;
+        z-index: 1000;
+
+        border-radius: 0 0 8px 8px;
+        background-color: white;
     }
 
-    #user-area {
-        border-radius: 6px; /*角の丸み*/
-        /* position: fixed; */
-        /* background-color:rgb(100,150,195); */
-    }
-    .container {
-        background-color: rgb(100, 150, 195);
-        height: 100%;
-        width: 100%;
-        /* left: 0;
-        right: 0; */
+    .bottom-bar {
+        position: sticky;
+        bottom: 0;
+
+        border-radius: 8px 8px 0 0;
+        background-color: white;
     }
 
-    .scrollarea {
-        position: relative;
-        background-color: rgb(100, 150, 195);
-        /* z-index: -1; */
-        /* overflow-y: scroll; スクロールを効かせつつ、メッセージがタイムラインの外に出ないようにする */
-        /* margin-bottom: 6ex; */
-        /* margin-top:6ex; */
-        padding-top: 6ex;
-        padding-bottom: 6ex;
-
-        /* margin: 6ex; */
-        /* border-top: 6ex; */
-        /* max-height: 100%-12ex; */
-        /* margin:6ex 0 6ex 0; */
-        /* min-height: 100%; */
+    .message-view {
+        margin: 0;
+        z-index: 0;
     }
+
     .my-message:before {
         /* ふきだしの右三角を描画 */
         float: right;
@@ -241,22 +200,8 @@
         /* bottom: 0; 下に固定 */
         /* right: auto; */
     }
-    #send-area {
-        width: 100%;
-        height: 100%;
-        background: greenyellow;
-        font-weight: bold;
-        border: solid 3px #6091d3; /*線*/
-        border-radius: 6px; /*角の丸み*/
-        box-sizing: border-box;
-    }
-    #text-area {
-        width: 100%;
-        height: 100%;
-        background: ghostwhite;
-        font-weight: bold;
-        border: solid 3px #6091d3; /*線*/
-        border-radius: 6px; /*角の丸み*/
-        box-sizing: border-box;
+
+    .bg-greenyellow {
+        background-color: greenyellow;
     }
 </style>
