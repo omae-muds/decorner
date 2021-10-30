@@ -58,7 +58,15 @@ export default {
 					dest: "public/vendor/bootstrap/css",
 				},
 				{
+					src: "node_modules/bootstrap/dist/css/bootstrap.min.css.map",
+					dest: "public/vendor/bootstrap/css",
+				},
+				{
 					src: "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+					dest: "public/vendor/bootstrap/js",
+				},
+				{
+					src: "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map",
 					dest: "public/vendor/bootstrap/js",
 				},
 			],
