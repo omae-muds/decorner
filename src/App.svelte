@@ -55,26 +55,22 @@
         </div>
     </div>
 
-    <div class="message-view container-fluid d-flex flex-grow-1 m-0 py-4">
-        <div class="list-group list-group-flush border-bottom">
-            {#each messages as msg}
-                <div
-                    class="list-group-item list-group-item-action lh-sm py-3"
-                >
-                    <div class="{msg.whose}-message">
-                        <div class="d-flex mx-2 mb-1">
-                            <span class="fw-bold text-truncate">{msg.username}</span>
-                            <span class="fw-light text-muted text-truncate align-text-bottom ms-1">
-                                <small>#{msg.userId}</small>
-                            </span>
-                        </div>
-                        <div class="col-10 mb-1 text-break">
-                            {msg.message}
-                        </div>
+    <div class="message-view container-fluid d-flex flex-column flex-grow-1 m-0 py-4">
+        {#each messages as msg}
+            <div class="d-flex w-100 lh-sm mb-2 p-0">
+                <div class="{msg.whose}-message shadow mw-75 px-3 py-2">
+                    <div class="d-flex mb-1">
+                        <span class="fw-bold text-truncate">{msg.username}</span>
+                        <span class="fw-light text-muted text-truncate align-text-bottom ms-1">
+                            <small>#{msg.userId}</small>
+                        </span>
+                    </div>
+                    <div class="text-break">
+                        {msg.message}
                     </div>
                 </div>
-            {/each}
-        </div>
+            </div>
+        {/each}
     </div>
 
     <div class="bottom-bar container-fluid shadow-lg py-2">
@@ -85,7 +81,7 @@
                     placeholder="Message"
                     bind:value={message}
                 />
-                <button class="input-group-text bg-greenyellow" type="submit">
+                <button class="input-group-text" type="submit" style="background-color: greenyellow;">
                     <ion-icon name="send-outline" />
                     <span class="ms-2 fw-light">Send</span>
                 </button>
@@ -126,82 +122,33 @@
         z-index: 0;
     }
 
-    .my-message:before {
-        /* ふきだしの右三角を描画 */
-        float: right;
-        content: "";
-        position: absolute;
-        z-index: 0;
+    .my-message {
+        margin-left: auto;
+        margin-right: 0;
+        max-width: 75%;
+
+        border-radius: 8px;
+        background-color: greenyellow;
+    }
+    .my-message::after {
         top: 8px;
         right: -20px;
         border: 12px solid transparent;
         border-left: 12px solid greenyellow;
     }
-    .my-message {
-        /* ふきだしの本体 */
-        float: right;
-        display: inline-block;
-        position: relative;
-        z-index: 0;
-        background-color: greenyellow;
-        border-radius: 10px;
-        padding: 8px;
-        margin: 0 10 10px 0px;
-        max-width: 75vw;
-    }
 
+    .other-message {
+        margin-left: 0;
+        margin-right: auto;
+        max-width: 75%;
+
+        border-radius: 8px;
+        background-color: white;
+    }
     .other-message:before {
-        /* ふきだしの左三角を描画 */
-        content: "";
-        position: absolute;
-        z-index: 0;
         top: 8px;
         left: -20px;
         border: 12px solid transparent;
         border-right: 12px solid white;
-    }
-    .other-message {
-        /* ふきだしの本体 */
-        display: inline-block;
-        position: relative;
-        z-index: 0;
-        background-color: white;
-        border-radius: 10px;
-        padding: 8px;
-        margin: 0 0 10px 10px;
-        max-width: 75vw;
-    }
-
-    .message-area {
-        /* background-color:rgb(100,150,195); */
-        height: 6ex;
-        width: 100%;
-        display: flex;
-        bottom: 0; /*下に固定*/
-        position: fixed;
-        z-index: 1;
-        /* max-height: 100vh; */
-        /* white-space: normal; */
-    }
-    .message-area-text {
-        background-color: rgb(100, 150, 195);
-        width: 90%;
-        word-wrap: break-word;
-        /* overflow-y: scroll;*/
-        max-height: 100vh;
-        white-space: normal;
-    }
-    .message-area-send {
-        background-color: rgb(100, 150, 195);
-        width: 10%;
-        margin-right: 1em;
-        /* position: fixed; */
-        /* position: absolute; */
-        /* bottom: 0; 下に固定 */
-        /* right: auto; */
-    }
-
-    .bg-greenyellow {
-        background-color: greenyellow;
     }
 </style>
