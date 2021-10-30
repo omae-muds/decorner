@@ -1,4 +1,3 @@
-const fs = require('fs');
 const Pusher = require('pusher');
 
 require('dotenv').config();
