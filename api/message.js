@@ -69,7 +69,7 @@ module.exports = async (req, res) => {
       if (body.message.includes(banword)) {
         const randApologies = apologiesList[Math.floor(Math.random() * apologiesList.length)];
         for (apology of randApologies) {
-          await new Promise(r => setTimeout(r, 1000));
+          await new Promise(r => setTimeout(r, 800));
 
           const pushApology = {
             userId: body.userId,
