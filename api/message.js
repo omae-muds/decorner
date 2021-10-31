@@ -68,19 +68,16 @@ module.exports = async (req, res) => {
     for (banword of banwords) {
       if (body.message.includes(banword)) {
         const randApologies = apologiesList[Math.floor(Math.random() * apologiesList.length)];
-
         for (apology of randApologies) {
+          await new Promise(r => setTimeout(r, 100));
+
           const pushApology = {
             userId: body.userId,
             username: body.username,
             message: apology,
           };
-  
-          setTimeout(() => {
-            pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
-              .then(resp => console.log(resp))
-              .catch(err => console.log(err))
-          }, 1000);
+          const apologyResp = await pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology);
+          console.log(apologyResp);
         }
         break;
       }
@@ -88,7 +85,6 @@ module.exports = async (req, res) => {
 
     res.status(200).send(resp);
   } catch (e) {
-    console.log(e);
     res.status(400).send(e);
   }
 };
