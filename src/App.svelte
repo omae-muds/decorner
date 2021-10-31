@@ -19,8 +19,7 @@
         const channel = pusher.subscribe(PUSHER_CHAT_CHANNEL);
 
         channel.bind(PUSHER_MESSAGE_EVENT, (resp) => {
-            // resp.whose = resp.userId === userId ? 'my' : 'other'
-            resp.whose = Math.random() < 0.5 ? 'my' : 'other'
+            resp.whose = resp.userId === userId ? 'my' : 'other';
             messages = [...messages, resp];
         });
     });
@@ -38,20 +37,11 @@
         message = '';
     };
 
-    const client_h = document.getElementsByClassName('bottom-bar').clientHeight;
-    
-    $: scrolleOnChange(messages);
-    function scrolleOnChange(messages) {
-        let scrollHeight = Math.max(
-            document.body.scrollHeight, document.documentElement.scrollHeight,
-            document.body.offsetHeight, document.documentElement.offsetHeight,
-            document.body.clientHeight, document.documentElement.clientHeight
-);
-        // let scrollHeight_test = scrollHeight - client_h;
-        window.scrollTo(0,scrollHeight);
-}
-
-
+    function scrollTo() {
+        document.getElementById('scrollTo').scrollIntoView({
+            behavior: 'auto',
+        });
+    }
 </script>
 
 <div class="body container-fluid d-flex flex-column p-0">
@@ -61,17 +51,18 @@
                 class="form-control fw-semibold"
                 form="messaging"
                 placeholder="YourName"
+                required
                 bind:value={username}
             />
-            <span class="input-group-text fw-light text-muted ps-1"
-                ><small>#{userId}</small></span
-            >
+            <span class="input-group-text fw-light text-muted ps-1">
+                <small>#{userId}</small>
+            </span>
         </div>
     </div>
 
-    <div class="message-view container-fluid d-flex flex-column flex-grow-1 m-0 overflow-auto py-4 px-4" id="scroll-inner">
+    <div class="message-view container-fluid d-flex flex-column flex-grow-1 m-0 px-4 py-4">
         {#each messages as msg}
-            <div class="d-flex w-100 lh-sm mb-2 p-0">
+            <div class="d-flex w-100 lh-sm mb-2 p-0" use:scrollTo>
                 <div class="{msg.whose}-message position-relative shadow mw-75 px-3 py-2">
                     <div class="d-flex mb-1">
                         <span class="fw-bold text-truncate">{msg.username}</span>
@@ -87,15 +78,22 @@
         {/each}
     </div>
 
+    <div id="scrollTo" class="container-fluid mh-0" />
+
     <div class="bottom-bar container-fluid shadow-lg py-2">
         <form id="messaging" action="POST" on:submit|preventDefault={submit}>
             <div class="input-group">
                 <input
                     class="form-control fw-semibold"
                     placeholder="Message"
+                    required
                     bind:value={message}
                 />
-                <button class="input-group-text" type="submit" style="background-color: greenyellow;">
+                <button
+                    class="input-group-text"
+                    type="submit"
+                    style="background-color: greenyellow;"
+                >
                     <ion-icon name="send-outline" />
                     <span class="ms-2 fw-light">Send</span>
                 </button>
@@ -145,15 +143,15 @@
         background-color: greenyellow;
     }
     .my-message::after {
-        content: '';
-	    position:absolute;
-	    top:1rem;
-	    right:-10px;
-	    /* border: 12px solid transparent; */
-        /* border-left: 12px solid greenyellow;  */
+        position: absolute;
+        top: 1rem;
+        right: -10px;
+
         border-top: 12px solid greenyellow;
         border-right: 12px solid transparent;
         border-left: 12px solid transparent;
+
+        content: "";
     }
 
     .other-message {
@@ -165,12 +163,14 @@
         background-color: white;
     }
     .other-message::before {
-        content: '';
+        position: absolute;
         top: 1rem;
         left: -10px;
-        position:absolute;
+
         border-top: 12px solid white;
         border-right: 12px solid transparent;
         border-left: 12px solid transparent;
+
+        content: "";
     }
 </style>
