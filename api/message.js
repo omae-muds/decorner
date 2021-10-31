@@ -77,12 +77,11 @@ module.exports = (req, res) => {
           message: apology,
         };
 
-        (async () => { await new Promise(r => setTimeout(r, 1000)) });
-
-        pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
-          .then(resp => res.status(200).send(resp))
-          .catch(err => res.status(400).send(err))
-        
+        setTimeout(() => {
+          pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
+            .then(resp => res.status(200).send(resp))
+            .catch(err => res.status(400).send(err))
+        }, 1000);
       });
 
       return;
