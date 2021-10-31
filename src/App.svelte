@@ -35,9 +35,23 @@
                 message,
             }),
         });
-
         message = '';
     };
+
+    const client_h = document.getElementsByClassName('bottom-bar').clientHeight;
+    
+    $: scrolleOnChange(messages);
+    function scrolleOnChange(messages) {
+        let scrollHeight = Math.max(
+            document.body.scrollHeight, document.documentElement.scrollHeight,
+            document.body.offsetHeight, document.documentElement.offsetHeight,
+            document.body.clientHeight, document.documentElement.clientHeight
+);
+        // let scrollHeight_test = scrollHeight - client_h;
+        window.scrollTo(0,scrollHeight);
+}
+
+
 </script>
 
 <div class="body container-fluid d-flex flex-column p-0">
@@ -55,10 +69,10 @@
         </div>
     </div>
 
-    <div class="message-view container-fluid d-flex flex-column flex-grow-1 m-0 py-4">
+    <div class="message-view container-fluid d-flex flex-column flex-grow-1 m-0 overflow-auto py-4 px-4" id="scroll-inner">
         {#each messages as msg}
             <div class="d-flex w-100 lh-sm mb-2 p-0">
-                <div class="{msg.whose}-message shadow mw-75 px-3 py-2">
+                <div class="{msg.whose}-message position-relative shadow mw-75 px-3 py-2">
                     <div class="d-flex mb-1">
                         <span class="fw-bold text-truncate">{msg.username}</span>
                         <span class="fw-light text-muted text-truncate align-text-bottom ms-1">
@@ -131,10 +145,15 @@
         background-color: greenyellow;
     }
     .my-message::after {
-        top: 8px;
-        right: -20px;
-        border: 12px solid transparent;
-        border-left: 12px solid greenyellow;
+        content: '';
+	    position:absolute;
+	    top:1rem;
+	    right:-10px;
+	    /* border: 12px solid transparent; */
+        /* border-left: 12px solid greenyellow;  */
+        border-top: 12px solid greenyellow;
+        border-right: 12px solid transparent;
+        border-left: 12px solid transparent;
     }
 
     .other-message {
@@ -145,10 +164,13 @@
         border-radius: 8px;
         background-color: white;
     }
-    .other-message:before {
-        top: 8px;
-        left: -20px;
-        border: 12px solid transparent;
-        border-right: 12px solid white;
+    .other-message::before {
+        content: '';
+        top: 1rem;
+        left: -10px;
+        position:absolute;
+        border-top: 12px solid white;
+        border-right: 12px solid transparent;
+        border-left: 12px solid transparent;
     }
 </style>
