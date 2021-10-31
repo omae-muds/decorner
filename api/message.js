@@ -54,7 +54,7 @@ const apologiesList = [
 ];
 
 
-module.exports = (req, res) => {
+module.exports = async (req, res) => {
   const body = req.body;
   const pushMessage = {
     userId: body.userId,
@@ -62,29 +62,33 @@ module.exports = (req, res) => {
     message: body.message,
   };
 
-  pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushMessage)
-    .then(resp => res.status(200).send(resp))
-    .catch(err => res.status(400).send(err));
+  try {
+    const resp = await pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushMessage);
 
-  for (banword of banwords) {
-    if (body.message.includes(banword)) {
-      const randApologies = apologiesList[Math.floor(Math.random() * apologiesList.length)];
+    for (banword of banwords) {
+      if (body.message.includes(banword)) {
+        const randApologies = apologiesList[Math.floor(Math.random() * apologiesList.length)];
 
-      for (apology of randApologies) {
-        const pushApology = {
-          userId: body.userId,
-          username: body.username,
-          message: apology,
-        };
-
-        setTimeout(() => {
-          pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
-            .then(resp => console.log(resp))
-            .catch(err => console.log(err))
-        }, 1000);
+        for (apology of randApologies) {
+          const pushApology = {
+            userId: body.userId,
+            username: body.username,
+            message: apology,
+          };
+  
+          setTimeout(() => {
+            pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
+              .then(resp => console.log(resp))
+              .catch(err => console.log(err))
+          }, 1000);
+        }
+        break;
       }
+    };
 
-      break;
-    }
-  };
+    res.status(200).send(resp);
+  } catch (e) {
+    console.log(e);
+    res.status(400).send(e);
+  }
 };
