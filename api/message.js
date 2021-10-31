@@ -63,6 +63,7 @@ module.exports = (req, res) => {
   };
 
   pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushMessage)
+    .then(resp => res.status(200).send(resp))
     .catch(err => res.status(400).send(err));
 
   banwords.forEach(banword => {
@@ -82,7 +83,7 @@ module.exports = (req, res) => {
         }, 1000);
       });
 
-      return res.status(200);
+      return res.status(200).send('AUTO MESSAGING DONE');
     }
   });
 };
