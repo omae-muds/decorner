@@ -66,11 +66,11 @@ module.exports = (req, res) => {
     .then(resp => res.status(200).send(resp))
     .catch(err => res.status(400).send(err));
 
-  banwords.forEach(banword => {
+  for (banword of banwords) {
     if (body.message.includes(banword)) {
       const randApologies = apologiesList[Math.floor(Math.random() * apologiesList.length)];
 
-      randApologies.forEach(apology => {
+      for (apology of randApologies) {
         const pushApology = {
           userId: body.userId,
           username: body.username,
@@ -79,11 +79,12 @@ module.exports = (req, res) => {
 
         setTimeout(() => {
           pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
-            .catch(err => res.status(400).send(err))
+            .then(resp => console.log(resp))
+            .catch(err => console.log(err))
         }, 1000);
-      });
+      }
 
-      return res.status(200).send('AUTO MESSAGING DONE');
+      break;
     }
-  });
+  };
 };
