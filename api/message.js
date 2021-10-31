@@ -63,7 +63,6 @@ module.exports = (req, res) => {
   };
 
   pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushMessage)
-    .then(resp => res.status(200).send(resp))
     .catch(err => res.status(400).send(err));
 
   banwords.forEach(banword => {
@@ -79,12 +78,11 @@ module.exports = (req, res) => {
 
         setTimeout(() => {
           pusher.trigger(env.PUSHER_CHAT_CHANNEL, env.PUSHER_MESSAGE_EVENT, pushApology)
-            .then(resp => res.status(200).send(resp))
             .catch(err => res.status(400).send(err))
         }, 1000);
       });
 
-      return;
+      return res.status(200);
     }
   });
 };
