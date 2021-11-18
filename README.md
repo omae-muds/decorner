@@ -1,5 +1,7 @@
 # [decorner](https://decorner.vercel.app)
 
+> 大学の授業課題として作成
+
 [decorner](https://decorner.vercel.app)
 
 悪口や非難するようなワードを投稿すると, 勝手に謝罪･訂正のメッセージを送信します.
